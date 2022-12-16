@@ -10,6 +10,7 @@ const EmailSchema = new mongoose.Schema(
         validator: (email) => /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(email),
         message: (props) => `${props.value} is not a valid email!`,
       },
+      unique: [true, "Email already exists"],
     },
   },
   { timestamps: true }
