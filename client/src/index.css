@@ -38,6 +38,69 @@ h1 {
   padding-top: 0.5em;
 }
 
+/* make pdate__email__modal a separate modal */
+#update__email__modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+#update__email__modal__content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+#update__email__modal__close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+#update__email__modal__close:hover,
+#update__email__modal__close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#update__email__modal__header {
+  padding: 2px 16px;
+}
+
+#update__email__modal__body {
+  padding: 2px 16px;
+}
+
+#update__email__modal__footer {
+  padding: 2px 16px;
+  text-align: center;
+}
+
+#update__email__modal__footer__button {
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+#update__email__modal__footer__button:hover {
+  background-color: #45a049;
+}
+
 #title__div:hover {
   animation: wiggle 1s ease-in-out;
 }
@@ -47,12 +110,14 @@ h1 {
     transform: rotate(0deg);
   }
   50% {
-    transform: rotate(2deg);
+    transform: rotate(1deg);
   }
   100% {
     transform: rotate(0deg);
   }
 }
+
+/* shift the button when clicked */
 
 button {
   border-radius: 8px;
@@ -72,8 +137,7 @@ button {
 button:hover {
   border-color: #646cff;
 }
-button:focus,
-button:focus-visible {
+button:active {
   outline: 4px auto -webkit-focus-ring-color;
 }
 

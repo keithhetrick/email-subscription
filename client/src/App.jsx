@@ -8,6 +8,7 @@ function App() {
   const [subscribed, setSubscribed] = useState(false);
   const [error, setError] = useState("");
   const [showAllEmails, setShowAllEmails] = useState(false);
+  const [currentEmail, setCurrentEmail] = useState(email);
 
   const { id } = useParams();
 
@@ -71,14 +72,19 @@ function App() {
           return;
         }
         // if invalid email, throw error
-        if (err.response.data.errors.email) {
+        if (err.response.data.errors?.email) {
           console.log(err.response.data.errors.email.properties.message);
           setError(err.response.data.errors.email.properties.message);
           return;
         }
+        // if undefined or null email, throw error
+        if (err.response.data.errors?.email === undefined || null) {
+          setError("");
+          return;
+        }
         // if other error, throw error
-        console.log(err.response.data.errors.email.message);
-        setError(err.response.data.errors.email.message);
+        console.log(err.response.data.errors?.email.message);
+        setError(err.response.data.errors?.email.message);
       });
   };
 
@@ -123,8 +129,13 @@ function App() {
 
   // automatically update the list of emails when subscriber is added or deleted
   useEffect(() => {
-    updateEmail(id);
+    if (updateEmail(id) === undefined) updateEmail(id);
   }, [id]);
+
+  // update current email when email is updated
+  useEffect(() => {
+    setCurrentEmail(email);
+  }, [email]);
 
   return (
     <div>
@@ -166,9 +177,26 @@ function App() {
               })}
           </div>
 
-          {/* ==================================== */}
-          {/* updateEmail email section to go here */}
-          {/* ==================================== */}
+          {/* when edit button is clicked, show updateEmail section to edit state */}
+          {showAllEmails && (
+            <div id="update__email__div">
+              {currentEmail && (
+                <p>
+                  Update <span style={{ color: "yellow" }}>{currentEmail}</span>{" "}
+                  to
+                </p>
+              )}
+              <input
+                ref={resetInputFieldRef}
+                type="email"
+                value={currentEmail}
+                placeholder="Enter your email"
+                onChange={(e) => setEmail(e.target.value)}
+                onKeyPress={enterKeySubmit}
+              />
+              <button onClick={emailButtonSubmit}>Submit</button>
+            </div>
+          )}
 
           {/* if unsubscribed & subscribers aren't showing */}
           {!showAllEmails && (
