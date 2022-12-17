@@ -14,7 +14,7 @@ function App() {
   // CRUD Operations URL
   const DATABASE_URL = "http://localhost:8000/api/emails/";
 
-  // POST Request to the database on submit
+  // CREATE - POST Request to the database
   const emailButtonSubmit = (e) => {
     e.preventDefault();
     axios
@@ -42,7 +42,7 @@ function App() {
       });
   };
 
-  // GET Request emails from the database on click
+  // READ - GET Request emails from the database
   const getAllEmails = () => {
     axios
       .get(`${DATABASE_URL}`)
@@ -55,7 +55,7 @@ function App() {
       });
   };
 
-  // UPDATE one email from the database on click
+  // UPDATE - PUT Request email by id from the database
   const updateEmail = (id) => {
     axios
       .put(`${DATABASE_URL}${id}`, { email })
@@ -82,7 +82,7 @@ function App() {
       });
   };
 
-  // DELETE one email from the database on click
+  // DELETE - DELETE Request email by id from the database
   const deleteEmail = (id) => {
     axios
       .delete(`${DATABASE_URL}${id}`)
@@ -101,7 +101,7 @@ function App() {
     setShowAllEmails((prev) => !prev);
   };
 
-  // "ENTER" key submit the form
+  // "ENTER" key submit
   const enterKeySubmit = (e) => {
     if (e.key === "Enter") {
       emailButtonSubmit(e);
@@ -121,7 +121,7 @@ function App() {
     resetInputFieldRef.current.value = "";
   }, [error]);
 
-  // automatically update the list of emails when a new email is added or deleted
+  // automatically update the list of emails when subscriber is added or deleted
   useEffect(() => {
     updateEmail(id);
   }, [id]);
@@ -143,7 +143,7 @@ function App() {
               <button onClick={getAllEmails}>Show All Subscribers</button>
             )}
 
-            {/* show all emails */}
+            {/* show all subscribers */}
             {showAllEmails &&
               showAllEmails.map((email) => {
                 return (
@@ -166,8 +166,11 @@ function App() {
               })}
           </div>
 
-          {/* updateEmail email section */}
+          {/* ==================================== */}
+          {/* updateEmail email section to go here */}
+          {/* ==================================== */}
 
+          {/* if unsubscribed & subscribers aren't showing */}
           {!showAllEmails && (
             <input
               ref={resetInputFieldRef}
@@ -181,6 +184,8 @@ function App() {
           {!showAllEmails && (
             <button onClick={emailButtonSubmit}>Subscribe</button>
           )}
+
+          {/* error message */}
           {error && <p> {error} </p>}
         </div>
       )}
