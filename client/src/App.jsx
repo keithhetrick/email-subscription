@@ -180,12 +180,15 @@ function App() {
           {/* when edit button is clicked, show updateEmail section to edit state */}
           {showAllEmails && (
             <div id="update__email__div">
+              {/* once onClick is submitted, switch from "currentEmail text block to "updated! text" */}
+
               {currentEmail && (
                 <p>
-                  Update <span style={{ color: "yellow" }}>{currentEmail}</span>{" "}
-                  to
+                  Update <span style={{ color: "yellow" }}>{email}</span> to{" "}
+                  {currentEmail}?
                 </p>
               )}
+
               <input
                 ref={resetInputFieldRef}
                 type="email"
