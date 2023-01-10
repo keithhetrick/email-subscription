@@ -62,7 +62,7 @@ function App() {
       .put(`${DATABASE_URL}${id}`, { email })
       .then((res) => {
         console.log(res.data);
-        setEmail(res.data.email);
+        setEmail(res.data?.email);
         getAllEmails();
       })
       .catch((err) => {
@@ -89,16 +89,18 @@ function App() {
   };
 
   // DELETE - DELETE Request email by id from the database
+  // add a confirmation message to confirm deletion
+
   const deleteEmail = (id) => {
     axios
       .delete(`${DATABASE_URL}${id}`)
       .then((res) => {
-        console.log(res.data);
+        console.log("DATA: ", res.data);
         setEmail(res.data.email);
         getAllEmails();
       })
       .catch((err) => {
-        console.log(err);
+        console.log("ERROR: ", err);
       });
   };
 

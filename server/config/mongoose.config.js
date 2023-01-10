@@ -13,7 +13,7 @@ mongoose
     console.log(
       colors.america("Established a connection to the ") +
         colors.inverse(`${dbName}`) +
-        colors.random(" database")
+        colors.random(" database\n")
     )
   )
   .catch((err) => console.log(err));

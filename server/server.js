@@ -25,5 +25,7 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(colors.magenta("Listening on port ") + colors.rainbow(`${PORT}`));
+  console.log(
+    colors.magenta("Listening on port ") + colors.rainbow(`${PORT}\n`)
+  );
 });
